@@ -17,7 +17,7 @@
     
     //Botones y divs
     var calcular = document.getElementById('calcular');
-    var error = document.getElementById('error');
+    var errorDiv = document.getElementById('error');
     var botonRegistro = document.getElementById('btnRegistro');
     var lista_productos = document.getElementById('lista-productos');
     var suma = document.getElementById('suma-total');
@@ -28,7 +28,24 @@
 
     calcular.addEventListener('click', calcularMontos);
 
+    pase_dia.addEventListener('blur', mostrarDias);//Recuerda el úlitmo dato
+    pase_dosdias.addEventListener('blur', mostrarDias);
+    pase_completo.addEventListener('blur', mostrarDias);
 
+    nombre.addEventListener('blur', validarCampos);
+    apellido.addEventListener('blur', validarCampos);
+    email.addEventListener('blur', validarCampos);
+
+    function validarCampos() {
+      if (this.value == '') {
+        errorDiv.style.display = 'block';
+        errorDiv.innerHTML = "*Este campo es obligatorio";
+        this.style.border = '1px solid red';
+      } else {
+        this.style.border = '1px solid #cccccc';
+        errorDiv.style.display = 'none';
+      }
+    }
 
     function calcularMontos(event){
       event.preventDefault();
@@ -70,12 +87,33 @@
           
         }
         suma.innerHTML = "$ " + totalPagar.toFixed(2); //Dos centavos
-          
         }
       }
+      
 
+      function mostrarDias(){
+        var boletosDia = parseInt(pase_dia.value, 10) || 0,
+            boletos2Dias = parseInt(pase_dosdias.value, 10) || 0,
+            boletoCompleto = parseInt(pase_completo.value, 10);
 
+        var diasElegidos = [];
 
+        if (boletosDia > 0) {
+          diasElegidos.push('viernes');
+        }
+        if (boletos2Dias > 0) {
+          diasElegidos.push('viernes', 'sabado');
+        }
+        if (boletoCompleto > 0) {
+          diasElegidos.push('viernes', 'sabado', 'domingo');
+        }
+
+        for (var i = 0; i < diasElegidos.length; i++) {
+          document.getElementById(diasElegidos[i]).style.display = 'block';
+          
+        }
+
+      }
 
 
   });
