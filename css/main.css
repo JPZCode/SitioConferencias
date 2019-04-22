@@ -667,7 +667,7 @@ div.paquetes .tabla-precio input {
 }
 .contenido-dia {
     padding: 20px;
-    /* display: none; */
+    display: none;
 
 }
 @media only screen and (min-width:768px) {
@@ -728,6 +728,11 @@ div.paquetes .tabla-precio input {
     color: #fe4918;
 }
 
+#error {
+    padding-left: 20px; 
+    width: 100%;
+    text-align: center;
+}
 
 
 
