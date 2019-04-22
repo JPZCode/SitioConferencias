@@ -35,6 +35,7 @@
     nombre.addEventListener('blur', validarCampos);
     apellido.addEventListener('blur', validarCampos);
     email.addEventListener('blur', validarCampos);
+    email.addEventListener('blur', validarMail);
 
     function validarCampos() {
       if (this.value == '') {
@@ -44,6 +45,17 @@
       } else {
         this.style.border = '1px solid #cccccc';
         errorDiv.style.display = 'none';
+      }
+    }
+
+    function validarMail() {
+      if(this.value.indexOf("@") > -1){
+        this.style.border = '1px solid #cccccc';
+        errorDiv.style.display = 'none';
+      } else {
+        errorDiv.style.display = 'block';
+        errorDiv.innerHTML = "*El correo no es válido";
+        this.style.border = '1px solid red';
       }
     }
 
